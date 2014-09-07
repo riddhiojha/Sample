@@ -24,7 +24,21 @@
     dataArray = [[NSMutableArray alloc] init];
     searchArray = [[NSMutableArray alloc] init];
     events = [[NSMutableArray alloc] init];
-    [self getFeedFromTwitter];// Do any additional setup after loading the view, typically from a nib.
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        
+        [self getFeedFromTwitter];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Twitter Login" message:@"Please log into Twitter through settings." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 - (void)didReceiveMemoryWarning
