@@ -13,6 +13,7 @@
 @end
 
 @implementation ViewController
+@synthesize managedObjectContext;
 
 - (void)viewDidLoad
 {
@@ -23,7 +24,7 @@
     [super viewDidLoad];
     dataArray = [[NSMutableArray alloc] init];
     searchArray = [[NSMutableArray alloc] init];
-    events = [[NSMutableArray alloc] init];
+//    events = [[NSMutableArray alloc] init];
     
 }
 
@@ -31,6 +32,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController.navigationBar setTranslucent:YES];
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         
         [self getFeedFromTwitter];
@@ -100,6 +103,9 @@
     [titleLabel setFont:[UIFont fontWithName:@"CenturyGothic" size:11]];
     [titleLabel setNumberOfLines:0]; // this is to ensure all text comes in new lines
     
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     //Added code for lazy loading
     UIImageView *feedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
     NSURL *urlForImage = [NSURL URLWithString:[userDictionary valueForKey:@"profile_image_url"]];
@@ -145,6 +151,123 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        selectedTableView = self.searchDisplayController.searchResultsTableView;
+
+        
+    } else {
+        selectedTableView = tableViewFeed;
+        
+        
+    }
+    UIAlertView *alertToShow = [[UIAlertView alloc] initWithTitle:@"Dubizzle" message:@"Do you want to add this to favourites?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Add to favourites", nil];
+    [alertToShow setTag:indexPath.row]; // to decipher later which one to add to favourites.
+    [alertToShow show];
+}
+
+#pragma mark - UIAlertView Delegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+   
+
+    
+    
+    
+    
+    
+    if (buttonIndex == 1) {
+        NSMutableDictionary *tempCellDict;
+        
+        if (selectedTableView == self.searchDisplayController.searchResultsTableView) {
+            tempCellDict = [searchArray objectAtIndex:alertView.tag];
+            
+        } else {
+            tempCellDict = [dataArray objectAtIndex:alertView.tag];
+            
+            
+        }
+        
+        
+        
+        // we will check for redundancy before adding
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        self.managedObjectContext = appDelegate.managedObjectContext;
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription
+                                       entityForName:@"FeedDetails" inManagedObjectContext:self.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        NSError *error;
+        NSArray *checkArray = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!checkArray.count) {
+            NSManagedObject *context;
+            
+            NSMutableDictionary *userDictionary = [tempCellDict valueForKey:@"user"];
+            
+            
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+            self.managedObjectContext = [appDelegate managedObjectContext];
+            
+            NSEntityDescription *entity = [NSEntityDescription entityForName:@"FeedDetails" inManagedObjectContext:self.managedObjectContext];
+            context = [[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:[self managedObjectContext]];
+            [context setValue:[NSString stringWithFormat:@"@%@",[userDictionary valueForKey: @"name"]] forKey:@"name"];
+            [context setValue:[userDictionary valueForKey:@"profile_image_url"] forKey:@"imageFeed"];
+            [context setValue:[tempCellDict valueForKey: @"text"] forKey:@"descriptionfeed"];
+            NSError *error;
+            [self.managedObjectContext save:&error];
+            
+            
+            favouritesButton.transform = CGAffineTransformMakeScale(1.7, 1.7);
+            [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                // animate it to the identity transform (100% scale)
+                favouritesButton.transform = CGAffineTransformIdentity;
+            } completion:^(BOOL finished){
+            }];
+
+        }
+        else
+        {
+            for (int i = 0; i<checkArray.count; i++) {
+                
+                // We will check with description, though a bad idea, but the only option pow as we dont have a primary key.
+                
+                NSMutableDictionary *tempCompareDict = [checkArray objectAtIndex:i];
+                if (![[tempCellDict valueForKey:@"text"] isEqualToString:[tempCompareDict valueForKey:@"descriptionfeed"]]) {
+                    NSManagedObject *context;
+                    
+                    NSMutableDictionary *userDictionary = [tempCellDict valueForKey:@"user"];
+                    
+                    
+                    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                    self.managedObjectContext = [appDelegate managedObjectContext];
+                    
+                    NSEntityDescription *entity = [NSEntityDescription entityForName:@"FeedDetails" inManagedObjectContext:self.managedObjectContext];
+                    context = [[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:[self managedObjectContext]];
+                    [context setValue:[NSString stringWithFormat:@"@%@",[userDictionary valueForKey: @"name"]] forKey:@"name"];
+                    [context setValue:[userDictionary valueForKey:@"profile_image_url"] forKey:@"imageFeed"];
+                    [context setValue:[tempCellDict valueForKey: @"text"] forKey:@"descriptionfeed"];
+                    NSError *error;
+                    [self.managedObjectContext save:&error];
+                    
+                    
+                    favouritesButton.transform = CGAffineTransformMakeScale(1.7, 1.7);
+                    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                        // animate it to the identity transform (100% scale)
+                        favouritesButton.transform = CGAffineTransformIdentity;
+                    } completion:^(BOOL finished){
+                    }];
+                    break;
+                }
+            }
+            
+        }
+
+    }
+}
+
 
 #pragma mark - Integrating the Twitter API
 
@@ -188,23 +311,23 @@
                   {
                       
 //                       tableTimer=[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(performTableUpdates:) userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:i],@"count", nil] repeats:YES];
-                      events = [NSJSONSerialization
+                      dataArray = [NSJSONSerialization
                                          JSONObjectWithData:responseData
                                          options:NSJSONReadingMutableLeaves
                                          error:&error];
                       
-                      if (events.count != 0) {
+                      if (dataArray.count != 0) {
                           dispatch_async(dispatch_get_main_queue(), ^{
                               
                               
-                              for (int i = 0; i < [events count] ; i++) {
-                                  [self performSelector:@selector(performTableUpdates:) withObject:[NSNumber numberWithInt:i] afterDelay:i*1.5];
-                                  //Not so impressive, but works :)
-                              }
+//                              for (int i = 0; i < [events count] ; i++) {
+//                                  [self performSelector:@selector(performTableUpdates:) withObject:[NSNumber numberWithInt:i] afterDelay:i*1.5];
+//                                  //Not so impressive, but works :)
+//                              }
                               
                               
                               //Loading the banner image once
-                              NSMutableDictionary *tempCellDict = [events objectAtIndex:0];
+                              NSMutableDictionary *tempCellDict = [dataArray objectAtIndex:0];
                               NSMutableDictionary *userDictionary = [tempCellDict valueForKey:@"user"];
                               
                               NSURL *urlForImage = [NSURL URLWithString:[userDictionary valueForKey:@"profile_banner_url"]];
@@ -284,29 +407,16 @@
 }
 
 
-#pragma mark - Animation for fun ;)
 
--(void)performTableUpdates:(id )intVariable
+#pragma mark - Present new view controller
+
+- (IBAction)viewFavouritesController:(id)sender
 {
-    int i = [intVariable intValue];
-    NSLog(@"%i",i);
-    NSIndexPath *ip=[NSIndexPath indexPathForRow:i inSection:0];
-    [dataArray addObject:[events objectAtIndex:i]];
-    [tableViewFeed beginUpdates];
-    [tableViewFeed insertRowsAtIndexPaths:[NSArray arrayWithObject:ip] withRowAnimation:UITableViewRowAnimationLeft];
-    [tableViewFeed endUpdates];
-    
-    if(i<[events count])
-    {
-        if([events count]-i==1)
-        {
-            i++;
-        }
-        else
-            i++;
-    }
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main"
+                                                 bundle:nil];
+    FavouritesViewController *favVc = [sb instantiateViewControllerWithIdentifier:@"favs"];
+    [self presentViewController:favVc animated:YES completion:nil];
 }
-
 
 
 
