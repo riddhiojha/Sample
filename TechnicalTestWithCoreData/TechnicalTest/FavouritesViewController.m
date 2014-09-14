@@ -116,21 +116,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //also putting the condition here as dynamic height is implemented for all cells
-    
-    
+    //also putting the condition here as dynamic height is implemented for all cells    
         NSMutableDictionary *tempCellDict = [dataArray objectAtIndex:indexPath.row];
         //Setting dynamic heigt according to the post
         CGSize siezToMake = [self getSizeOfText:[tempCellDict valueForKey:@"descriptionfeed"] withFont:[UIFont fontWithName:@"CenturyGothic" size:11]];
         
         return siezToMake.height+50;
-        
-        
-    
     
 }
-
-
 #pragma mark -  Get Size of text
 
 
