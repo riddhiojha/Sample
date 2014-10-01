@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A81B952E-5E8F-40C7-887D-E6859BBE5099</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RotaryWheelProject</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D8D48A8B0B6C40C6FE4C070E0538BAF789A7CD97</key>
+		<string>https://github.com/riddhiojha/Sample.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RotatingConcentricWheels/RotaryWheelProject.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D8D48A8B0B6C40C6FE4C070E0538BAF789A7CD97</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/riddhiojha/Sample.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D8D48A8B0B6C40C6FE4C070E0538BAF789A7CD97</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D8D48A8B0B6C40C6FE4C070E0538BAF789A7CD97</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Sample</string>
+		</dict>
+	</array>
+</dict>
+</plist>

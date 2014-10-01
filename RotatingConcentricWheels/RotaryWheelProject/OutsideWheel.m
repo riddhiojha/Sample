@@ -199,7 +199,7 @@ static float maxAlphavalue = 1.0;
     CGPoint touchPoint = [touch locationInView:self];
     float dist = [self calculateDistanceFromCenter:touchPoint];
     
-    if (dist < 100 )
+    if (dist < 120 )
     {
         // forcing a tap to be on the ferrule
         NSLog(@"ignoring tap (%f,%f)", touchPoint.x, touchPoint.y);

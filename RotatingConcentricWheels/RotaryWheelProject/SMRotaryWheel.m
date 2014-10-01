@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 studiomagnolia.com. All rights reserved.
 
 
+#define DEGREES_RADIANS(angle) ((angle) / 180.0 * M_PI)
+
 #import "SMRotaryWheel.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SMCLove.h"
@@ -44,6 +46,8 @@ static float maxAlphavalue = 1.0;
 
 
 - (void) drawWheel {
+    
+    
 
     container = [[UIView alloc] initWithFrame:self.frame];
         
@@ -66,7 +70,79 @@ static float maxAlphavalue = 1.0;
         
         UIImageView *cloveImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, 15, 40, 40)];
         cloveImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon%i.png", i]];
+//        [im addSubview:cloveImage];
+        
+        
+        UILabel *testlabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, 40, 40)];
+        testlabel.text = [NSString stringWithFormat:@"test%i", i];
+        
+        
+        
+        int ringWidth = 40;
+        int textRadius = 40;
+        int ringAlpha = 1.0;
+        int textAlpha = 1.0;
+        char* fontName = (char*)[[UIFont fontWithName:@"VAGRounded-Bold" size:18].fontName cStringUsingEncoding:NSASCIIStringEncoding];
+        
+        NSArray* sections = [[NSArray alloc] initWithObjects:@"settings",nil];
+        
+        
+        CGPoint centerPoint = CGPointMake(40 / 2, 40 / 2);
+        
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+        CGContextRef context = CGBitmapContextCreate(@"Setting", 40, 40, 8,40, colorSpace, kCGImageAlphaPremultipliedFirst);
+        
+        CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+        
+        CGContextSelectFont(context, fontName, 18, kCGEncodingMacRoman);
+        CGContextSetRGBStrokeColor(context, 255.0/255.0, 255.0/255.0, 255.0/255.0, ringAlpha);
+        CGContextSetLineWidth(context, ringWidth);
+        
+        CGContextStrokeEllipseInRect(context, CGRectMake(ringWidth, ringWidth, 40 - (ringWidth * 2), 40 - (ringWidth * 2)));
+        CGContextSetRGBFillColor(context, 255.0/255.0, 255.0/255.0, 255.0/255.0, textAlpha);
+        
+        CGContextSaveGState(context);
+        CGContextTranslateCTM(context, centerPoint.x, centerPoint.y);
+        float angle = DEGREES_RADIANS(90);
+        [self drawStringAtContext:context string:@"Setting" atAngle:angle withRadius:40];
+        
+             
+        CGContextRestoreGState(context);
+        
+        CGImageRef contextImage = CGBitmapContextCreateImage(context);
+        
+        CGContextRelease(context);
+        CGColorSpaceRelease(colorSpace);
+        
+        
+        UIImage* uiImage = [[UIImage alloc] initWithCGImage:CGBitmapContextCreateImage(context)];
+       
+        UIImageView *textImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, 15, 40, 40)];
+        textImage.image = uiImage;
         [im addSubview:cloveImage];
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        [UIView beginAnimations:nil context:NULL]; // arguments are optional
+//        view.transform = CGAffineTransformMakeRotation(M_PI_2);
+        [UIView commitAnimations];
+        
+        // CALayer's transform property is a CATransform3D.
+        // rotate around a vector (x, y, z) = (0, 0, 1) where positive Z points
+        // out of the device's screen.
+        
+        testlabel.layer.transform = CATransform3DMakeRotation(M_PI_2, 0, 0, 1);
+//        [im addSubview:testlabel];
         
         [container addSubview:im];
         
@@ -199,7 +275,7 @@ static float maxAlphavalue = 1.0;
     CGPoint touchPoint = [touch locationInView:self];
     float dist = [self calculateDistanceFromCenter:touchPoint];
     
-    if (dist > 150)
+    if (dist > 180)
     {
         // forcing a tap to be on the ferrule
         NSLog(@"ignoring tap (%f,%f)", touchPoint.x, touchPoint.y);
@@ -226,18 +302,18 @@ static float maxAlphavalue = 1.0;
     
     float dist = [self calculateDistanceFromCenter:pt];
     
-    if (dist < 40 || dist > 100) 
-    {
-        // a drag path too close to the center
-        NSLog(@"drag path too close to the center (%f,%f)", pt.x, pt.y);
-        
-        // here you might want to implement your solution when the drag 
-        // is too close to the center
-        // You might go back to the clove previously selected
-        // or you might calculate the clove corresponding to
-        // the "exit point" of the drag.
-
-    }
+//    if (dist < 40 || dist > 100) 
+//    {
+//        // a drag path too close to the center
+//        NSLog(@"drag path too close to the center (%f,%f)", pt.x, pt.y);
+//        
+//        // here you might want to implement your solution when the drag 
+//        // is too close to the center
+//        // You might go back to the clove previously selected
+//        // or you might calculate the clove corresponding to
+//        // the "exit point" of the drag.
+//
+//    }
 	
 	float dx = pt.x  - container.center.x;
 	float dy = pt.y  - container.center.y;
@@ -350,6 +426,44 @@ static float maxAlphavalue = 1.0;
     
     return res;
 }
+
+
+#pragma mark - Circularise text
+
+- (void) drawStringAtContext:(CGContextRef) context string:(NSString*) text atAngle:(float) angle withRadius:(float) radius
+{
+    
+    float perimeter = 2 * M_PI * radius;
+    float textAngle = 30.0 / perimeter * 2 * M_PI;
+    
+    angle += textAngle / 2;
+    
+    for (int index = 0; index < [text length]; index++)
+    {
+        NSRange range = {index, 1};
+        NSString* letter = [text substringWithRange:range];
+        char* c = (char*)[letter cStringUsingEncoding:NSASCIIStringEncoding];
+        
+        NSLog(@"Char %@ with size: %f x %f", letter, 30.0, 30.0);
+        
+        float x = radius * cos(angle);
+        float y = radius * sin(angle);
+        
+        float letterAngle = (30.0 / perimeter * -2 * M_PI);
+        
+        CGContextSaveGState(context);
+        CGContextTranslateCTM(context, x, y);
+        CGContextRotateCTM(context, (angle - 0.5 * M_PI));
+        CGContextShowTextAtPoint(context, 0, 0, c, strlen(c));
+        CGContextRestoreGState(context);
+        
+        angle += letterAngle;
+    }
+}
+
+- (UIImage*) createMenuRingWithFrame:(CGRect)frame
+{
+    }
 
 
 

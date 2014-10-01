@@ -16,6 +16,8 @@
 		0BCF229119DAFA7000D4E56C /* Cone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCF228919DAFA7000D4E56C /* Cone4.png */; };
 		0BCF229219DAFA7000D4E56C /* Cone3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCF228A19DAFA7000D4E56C /* Cone3.png */; };
 		0BCF229319DAFA7000D4E56C /* Cone2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCF228B19DAFA7000D4E56C /* Cone2.png */; };
+		0BCF229519DB0B9F00D4E56C /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BCF229419DB0B9F00D4E56C /* CoreImage.framework */; };
+		0BCF229719DB0BAB00D4E56C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BCF229619DB0BAB00D4E56C /* CoreText.framework */; };
 		BD683C5E14EAB964005EF069 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BD683C5314EAB964005EF069 /* bg.png */; };
 		BD683C5F14EAB964005EF069 /* centerButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BD683C5414EAB964005EF069 /* centerButton.png */; };
 		BD683C6014EAB964005EF069 /* icon0.png in Resources */ = {isa = PBXBuildFile; fileRef = BD683C5514EAB964005EF069 /* icon0.png */; };
@@ -51,6 +53,8 @@
 		0BCF228919DAFA7000D4E56C /* Cone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cone4.png; sourceTree = "<group>"; };
 		0BCF228A19DAFA7000D4E56C /* Cone3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cone3.png; sourceTree = "<group>"; };
 		0BCF228B19DAFA7000D4E56C /* Cone2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cone2.png; sourceTree = "<group>"; };
+		0BCF229419DB0B9F00D4E56C /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		0BCF229619DB0BAB00D4E56C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		BD683C5314EAB964005EF069 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		BD683C5414EAB964005EF069 /* centerButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = centerButton.png; sourceTree = "<group>"; };
 		BD683C5514EAB964005EF069 /* icon0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon0.png; sourceTree = "<group>"; };
@@ -64,7 +68,7 @@
 		BD683C5D14EAB964005EF069 /* segment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = segment.png; sourceTree = "<group>"; };
 		BDD8AD3414EA8A1B002425D6 /* SMCLove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCLove.h; sourceTree = "<group>"; };
 		BDD8AD3514EA8A1B002425D6 /* SMCLove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCLove.m; sourceTree = "<group>"; };
-		BDF4389C14E5638700A27135 /* RotaryWheelProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RotaryWheelProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDF4389C14E5638700A27135 /* Concentric wheels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Concentric wheels.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF438A014E5638700A27135 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BDF438A214E5638700A27135 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BDF438A414E5638700A27135 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -88,10 +92,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BCF229719DB0BAB00D4E56C /* CoreText.framework in Frameworks */,
+				0BCF229519DB0B9F00D4E56C /* CoreImage.framework in Frameworks */,
+				BDF438A514E5638700A27135 /* CoreGraphics.framework in Frameworks */,
 				BDF438C614E572EB00A27135 /* QuartzCore.framework in Frameworks */,
 				BDF438A114E5638700A27135 /* UIKit.framework in Frameworks */,
 				BDF438A314E5638700A27135 /* Foundation.framework in Frameworks */,
-				BDF438A514E5638700A27135 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +142,7 @@
 		BDF4389D14E5638700A27135 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BDF4389C14E5638700A27135 /* RotaryWheelProject.app */,
+				BDF4389C14E5638700A27135 /* Concentric wheels.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,6 +150,8 @@
 		BDF4389F14E5638700A27135 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0BCF229619DB0BAB00D4E56C /* CoreText.framework */,
+				0BCF229419DB0B9F00D4E56C /* CoreImage.framework */,
 				BDF438C514E572EB00A27135 /* QuartzCore.framework */,
 				BDF438A014E5638700A27135 /* UIKit.framework */,
 				BDF438A214E5638700A27135 /* Foundation.framework */,
@@ -201,7 +209,7 @@
 			);
 			name = RotaryWheelProject;
 			productName = RotaryWheelProject;
-			productReference = BDF4389C14E5638700A27135 /* RotaryWheelProject.app */;
+			productReference = BDF4389C14E5638700A27135 /* Concentric wheels.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -344,10 +352,13 @@
 		BDF438BB14E5638700A27135 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RotaryWheelProject/RotaryWheelProject-Prefix.pch";
 				INFOPLIST_FILE = "RotaryWheelProject/RotaryWheelProject-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				PRODUCT_NAME = "Concentric wheels";
+				VALID_ARCHS = "arm64 armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -355,10 +366,13 @@
 		BDF438BC14E5638700A27135 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RotaryWheelProject/RotaryWheelProject-Prefix.pch";
 				INFOPLIST_FILE = "RotaryWheelProject/RotaryWheelProject-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				PRODUCT_NAME = "Concentric wheels";
+				VALID_ARCHS = "arm64 armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

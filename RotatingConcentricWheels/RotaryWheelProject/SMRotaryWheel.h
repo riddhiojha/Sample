@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SMRotaryProtocol.h"
+#import <CoreImage/CoreImage.h>
 
 @interface SMRotaryWheel : UIControl
 
