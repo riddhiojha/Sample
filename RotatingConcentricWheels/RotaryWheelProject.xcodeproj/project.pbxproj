@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B28186419DBF49200723B1D /* overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B28186319DBF49200723B1D /* overlay@2x.png */; };
 		0BCF228319DAF1D000D4E56C /* OutsideWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCF228219DAF1D000D4E56C /* OutsideWheel.m */; };
 		0BCF228C19DAFA7000D4E56C /* Cone1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCF228419DAFA6F00D4E56C /* Cone1.png */; };
 		0BCF228D19DAFA7000D4E56C /* Cone0.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BCF228519DAFA7000D4E56C /* Cone0.png */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B28186319DBF49200723B1D /* overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "overlay@2x.png"; sourceTree = "<group>"; };
 		0BCF228119DAF1D000D4E56C /* OutsideWheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutsideWheel.h; sourceTree = "<group>"; };
 		0BCF228219DAF1D000D4E56C /* OutsideWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutsideWheel.m; sourceTree = "<group>"; };
 		0BCF228419DAFA6F00D4E56C /* Cone1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cone1.png; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				BD683C5314EAB964005EF069 /* bg.png */,
 				BD683C5414EAB964005EF069 /* centerButton.png */,
+				0B28186319DBF49200723B1D /* overlay@2x.png */,
 				BD683C5514EAB964005EF069 /* icon0.png */,
 				BD683C5614EAB964005EF069 /* icon1.png */,
 				BD683C5714EAB964005EF069 /* icon2.png */,
@@ -257,6 +260,7 @@
 				BD683C6414EAB964005EF069 /* icon4.png in Resources */,
 				0BCF229319DAFA7000D4E56C /* Cone2.png in Resources */,
 				BD683C6514EAB964005EF069 /* icon5.png in Resources */,
+				0B28186419DBF49200723B1D /* overlay@2x.png in Resources */,
 				BD683C6614EAB964005EF069 /* icon6.png in Resources */,
 				0BCF228D19DAFA7000D4E56C /* Cone0.png in Resources */,
 				BD683C6714EAB964005EF069 /* icon7.png in Resources */,

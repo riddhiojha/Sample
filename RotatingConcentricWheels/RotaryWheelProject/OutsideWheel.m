@@ -20,7 +20,7 @@
 @end
 
 static float deltaAngle;
-static float minAlphavalue = 1.0;
+static float minAlphavalue = 0.6;
 static float maxAlphavalue = 1.0;
 
 @implementation OutsideWheel
@@ -64,7 +64,7 @@ static float maxAlphavalue = 1.0;
             im.alpha = maxAlphavalue;
         }
         
-        UIImageView *cloveImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, 15, 50, 50)];
+        UIImageView *cloveImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, 15, 600, 600)];
         cloveImage.image = [UIImage imageNamed:[NSString stringWithFormat:@""]];
         [im addSubview:cloveImage];
         
@@ -199,12 +199,12 @@ static float maxAlphavalue = 1.0;
     CGPoint touchPoint = [touch locationInView:self];
     float dist = [self calculateDistanceFromCenter:touchPoint];
     
-    if (dist < 120 )
-    {
-        // forcing a tap to be on the ferrule
-        NSLog(@"ignoring tap (%f,%f)", touchPoint.x, touchPoint.y);
-        return NO;
-    }
+//    if (dist < 180 )
+//    {
+//        // forcing a tap to be on the ferrule
+//        NSLog(@"ignoring tap (%f,%f)", touchPoint.x, touchPoint.y);
+//        return NO;
+//    }
     
     float dx = touchPoint.x - container.center.x;
     float dy = touchPoint.y - container.center.y;
@@ -226,7 +226,7 @@ static float maxAlphavalue = 1.0;
     
     float dist = [self calculateDistanceFromCenter:pt];
     
-    if (dist < 40)
+    if (dist < 100)
     {
         // a drag path too close to the center
         NSLog(@"drag path too close to the center (%f,%f)", pt.x, pt.y);

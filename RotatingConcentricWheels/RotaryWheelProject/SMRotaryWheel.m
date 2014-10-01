@@ -22,7 +22,7 @@
 @end
 
 static float deltaAngle;
-static float minAlphavalue = 0.8;
+static float minAlphavalue = 0.6;
 static float maxAlphavalue = 1.0;
 
 @implementation SMRotaryWheel
@@ -55,7 +55,7 @@ static float maxAlphavalue = 1.0;
     
     for (int i = 0; i < numberOfSections; i++) {
         
-        UIImageView *im = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"segment.png"]];
+        UIImageView *im = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon%i.png", i]]];
         
         im.layer.anchorPoint = CGPointMake(1.0f, 0.5f);
         im.layer.position = CGPointMake(container.bounds.size.width/2.0-container.frame.origin.x, 
@@ -68,8 +68,8 @@ static float maxAlphavalue = 1.0;
             im.alpha = maxAlphavalue;
         }
         
-        UIImageView *cloveImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, 15, 40, 40)];
-        cloveImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon%i.png", i]];
+        UIImageView *cloveImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, 15, 200, 200)];
+        cloveImage.image = [UIImage imageNamed:[NSString stringWithFormat:@""]];
 //        [im addSubview:cloveImage];
         
         
@@ -121,17 +121,6 @@ static float maxAlphavalue = 1.0;
         textImage.image = uiImage;
         [im addSubview:cloveImage];
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         [UIView beginAnimations:nil context:NULL]; // arguments are optional
 //        view.transform = CGAffineTransformMakeRotation(M_PI_2);
@@ -274,17 +263,17 @@ static float maxAlphavalue = 1.0;
     
     CGPoint touchPoint = [touch locationInView:self];
     float dist = [self calculateDistanceFromCenter:touchPoint];
-    
-    if (dist > 180)
-    {
-        // forcing a tap to be on the ferrule
-        NSLog(@"ignoring tap (%f,%f)", touchPoint.x, touchPoint.y);
-        return NO;
-    }
+//    
+//    if (dist > 250)
+//    {
+//        // forcing a tap to be on the ferrule
+//        NSLog(@"ignoring tap (%f,%f)", touchPoint.x, touchPoint.y);
+//        return NO;
+//    }
     
 	float dx = touchPoint.x - container.center.x;
 	float dy = touchPoint.y - container.center.y;
-	deltaAngle = atan2(dy,dx); 
+	deltaAngle = atan2(dy,dx);
     
     startTransform = container.transform;
     

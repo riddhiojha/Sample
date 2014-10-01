@@ -38,32 +38,33 @@
     
     
     
-    OutsideWheel *wheelOuter = [[OutsideWheel alloc] initWithFrame:CGRectMake(0, 0, 300, 300)
+    OutsideWheel *wheelOuter = [[OutsideWheel alloc] initWithFrame:CGRectMake(0, 0, 500, 560)
                                                        andDelegate:self
                                                       withSections:8];
     
     
-    wheelOuter.center = CGPointMake(160, 240);
+    wheelOuter.center = CGPointMake(320, 240);
     [self.view addSubview:wheelOuter];
     
-    SMRotaryWheel *wheel = [[SMRotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 150, 150)
+    SMRotaryWheel *wheel = [[SMRotaryWheel alloc] initWithFrame:CGRectMake(0, 0, 250, 560)
                                                     andDelegate:self
                                                    withSections:8];
     
     
-    wheel.center = CGPointMake(160, 240);
+    wheel.center = CGPointMake(320, 240);
     [self.view addSubview:wheel];
 
 
     
     
-    /*
-    UIImageView *bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
-    bg.center = CGPointMake(320, 240);
-    bg.image = [UIImage imageNamed:@"bg.png"];
-    [self.view addSubview:bg];
-     
-     */
+//    
+//    UIImageView *bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+//    bg.center = CGPointMake(160, 240);
+//    bg.userInteractionEnabled = NO;
+//    bg.image = [UIImage imageNamed:@"overlay.png"];
+//    [self.view addSubview:bg];
+//     
+    
     
 
     
